@@ -219,6 +219,17 @@
     .zone-banner--compact .zone-banner__actions {
       align-items: flex-end;
     }
+    .zone-banner--success {
+      background: #F4FAEC;
+      border: 1px solid #B7D992;
+      border-left: 4px solid var(--green);
+      display: none;
+    }
+    .zone-banner--success.is-visible { display: flex; }
+    .zone-banner--success .zone-banner__title { color: #3D6B1A; }
+    .zone-banner--success .zone-banner__text { color: #5A7A3A; }
+    .zone-banner--success .zone-banner__text strong { color: #3D6B1A; }
+    .zone-banner--attention.is-hidden { display: none; }
 
     /* Views */
     .view { display: none; }
@@ -521,7 +532,112 @@
       gap: 14px;
       color: #A0A7AD;
     }
+    .row-actions button {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      cursor: pointer;
+      display: inline-flex;
+    }
     .row-actions svg { width: 16px; height: 16px; }
+
+    /* NS update warning modal — Figma layout */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(47, 58, 64, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop.is-open { display: flex; }
+    .modal {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      border-radius: 4px;
+      padding: 40px 36px 32px;
+      text-align: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      font-family: var(--font);
+    }
+    .modal__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: #B0B6BB;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+      padding: 0;
+    }
+    .modal__close:hover { color: #6B757B; }
+    .modal__art {
+      width: 160px;
+      height: 120px;
+      margin: 0 auto 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal__title {
+      margin: 0 0 12px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #444444;
+      line-height: 1.3;
+    }
+    .modal__text {
+      margin: 0 auto 28px;
+      max-width: 420px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #888888;
+      line-height: 1.5;
+    }
+    .modal__actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .modal__btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 16px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .modal__btn--primary {
+      background: var(--green-btn);
+      color: #fff;
+      border: none;
+      box-shadow: -2px 2px 0 var(--green-btn-shadow);
+    }
+    .modal__btn--primary:hover { background: #68A02C; }
+    .modal__btn--secondary {
+      background: #fff;
+      color: var(--green-btn);
+      border: 1.5px solid var(--green-btn);
+    }
+    .modal__btn--secondary:hover { background: #F7FBF0; }
 
     /* Live chat — match AM */
     .live-chat {
@@ -721,7 +837,7 @@
 
     <div class="view" id="view-ns" data-view="ns">
       <div class="ns-page" id="name-servers">
-        <div class="zone-banner zone-banner--compact" role="status">
+        <div class="zone-banner zone-banner--compact zone-banner--attention" id="ns-attention-banner" role="status">
           <div class="zone-banner__icon" aria-hidden="true">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Attention">
               <path d="M24 6L44 40H4L24 6z" fill="#F5C518" stroke="#E6A100" stroke-width="2" stroke-linejoin="round"/>
@@ -743,10 +859,29 @@
           </div>
         </div>
 
+        <div class="zone-banner zone-banner--compact zone-banner--success" id="ns-updated-banner" role="status">
+          <div class="zone-banner__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="24" cy="24" r="18" fill="#E8F5D8" stroke="#74B034" stroke-width="2"/>
+              <path d="M15 24.5l6 6 12-13" stroke="#74B034" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="zone-banner__body">
+            <h3 class="zone-banner__title">Name Server(s) have been updated</h3>
+            <p class="zone-banner__text">
+              Your name servers are now set for Account Manager DNS.
+              Next, update your <strong>DNS records</strong> in DNS Settings so your website and email continue to work without interruption.
+            </p>
+          </div>
+          <div class="zone-banner__actions">
+            <a class="zone-banner__btn" href="#" id="btn-go-dns-records">GO TO DNS SETTINGS</a>
+          </div>
+        </div>
+
         <div class="ns-section">
           <div class="ns-head">
             <h2>Name Servers <span class="count">(2/6)</span> <span class="ns-tip" title="Name servers tell the internet where to find your domain">i</span></h2>
-            <button class="btn-outline" type="button">Add name server</button>
+            <button class="btn-outline" type="button" id="btn-add-ns" data-open-ns-warning>Add name server</button>
           </div>
           <div class="table-wrap">
             <table class="ns">
@@ -774,9 +909,13 @@
                   </td>
                   <td>ns1.bluehost.com</td>
                   <td>162.159.24.80</td>
-                  <td><span class="row-actions" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-                    <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <td><span class="row-actions">
+                    <button type="button" data-open-ns-warning aria-label="Edit name server">
+                      <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button type="button" aria-label="Delete name server">
+                      <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
                   </span></td>
                 </tr>
                 <tr>
@@ -794,9 +933,13 @@
                   </td>
                   <td>ns2.bluehost.com</td>
                   <td>162.159.25.175</td>
-                  <td><span class="row-actions" aria-hidden="true">
-                    <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-                    <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <td><span class="row-actions">
+                    <button type="button" data-open-ns-warning aria-label="Edit name server">
+                      <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+                    </button>
+                    <button type="button" aria-label="Delete name server">
+                      <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
                   </span></td>
                 </tr>
               </tbody>
@@ -866,6 +1009,37 @@
     Live Chat
   </a>
 
+  <!-- Warning popup: DNS records not migrated on NS change -->
+  <div class="modal-backdrop" id="ns-warning-modal" role="dialog" aria-modal="true" aria-labelledby="ns-warning-title" hidden>
+    <div class="modal">
+      <button type="button" class="modal__close" id="ns-warning-close" aria-label="Close">×</button>
+      <div class="modal__art" aria-hidden="true">
+        <svg width="160" height="120" viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="80" cy="78" rx="48" ry="18" fill="#EDE7F6"/>
+          <rect x="38" y="28" width="84" height="56" rx="3" stroke="#8A9399" stroke-width="2" fill="#fff"/>
+          <rect x="44" y="34" width="72" height="40" rx="1.5" fill="#F7F8FA" stroke="#C5CAD0" stroke-width="1.2"/>
+          <path d="M52 44h18M52 50h24M52 56h14" stroke="#C5CAD0" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M80 22l28 48H52L80 22z" fill="#F5C518" stroke="#E6A100" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M80 38v16" stroke="#5C4A00" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="80" cy="61" r="2.4" fill="#5C4A00"/>
+          <circle cx="108" cy="40" r="3" fill="#74B034"/>
+          <circle cx="118" cy="52" r="2.5" fill="#74B034"/>
+          <path d="M108 40l10 12" stroke="#74B034" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <h2 class="modal__title" id="ns-warning-title">DNS records will not be migrated</h2>
+      <p class="modal__text">
+        Existing DNS records will not be migrated automatically. After the name server change is complete,
+        you will need to import your DNS records or recreate them manually in the new DNS zone
+        to avoid potential service interruptions, such as website or email downtime.
+      </p>
+      <div class="modal__actions">
+        <button type="button" class="modal__btn modal__btn--primary" id="ns-warning-proceed">Continue</button>
+        <a class="modal__btn modal__btn--secondary" id="ns-warning-know-more" href="https://www.crazydomains.com/help/article/crazy-domains-dns-management" target="_blank" rel="noopener">Know More</a>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
       var tabs = document.querySelectorAll('.tabs a[data-tab]');
@@ -873,6 +1047,7 @@
         dns: document.getElementById('view-dns'),
         ns: document.getElementById('view-ns')
       };
+      var modal = document.getElementById('ns-warning-modal');
 
       function showView(name) {
         Object.keys(views).forEach(function (key) {
@@ -882,6 +1057,20 @@
           tab.classList.toggle('active', tab.getAttribute('data-tab') === name);
         });
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function openModal() {
+        if (!modal) return;
+        modal.hidden = false;
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        modal.hidden = true;
+        document.body.style.overflow = '';
       }
 
       tabs.forEach(function (tab) {
@@ -899,6 +1088,57 @@
           showView('ns');
         });
       }
+
+      document.querySelectorAll('[data-open-ns-warning]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      var closeBtn = document.getElementById('ns-warning-close');
+      var proceedBtn = document.getElementById('ns-warning-proceed');
+      var attentionBanner = document.getElementById('ns-attention-banner');
+      var updatedBanner = document.getElementById('ns-updated-banner');
+      var goDnsBtn = document.getElementById('btn-go-dns-records');
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (proceedBtn) {
+        proceedBtn.addEventListener('click', function () {
+          closeModal();
+          if (attentionBanner) attentionBanner.classList.add('is-hidden');
+          if (updatedBanner) {
+            updatedBanner.classList.add('is-visible');
+            updatedBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          // Prototype: reflect recommended Account Manager DNS name servers
+          var hosts = document.querySelectorAll('#view-ns table.ns tbody tr');
+          if (hosts[0]) {
+            var cells0 = hosts[0].querySelectorAll('td');
+            if (cells0[1]) cells0[1].textContent = 'ns1.dnspackage.com';
+            if (cells0[2]) cells0[2].textContent = '—';
+          }
+          if (hosts[1]) {
+            var cells1 = hosts[1].querySelectorAll('td');
+            if (cells1[1]) cells1[1].textContent = 'ns2.dnspackage.com';
+            if (cells1[2]) cells1[2].textContent = '—';
+          }
+        });
+      }
+      if (goDnsBtn) {
+        goDnsBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          showView('dns');
+        });
+      }
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeModal();
+        });
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) closeModal();
+      });
     })();
   </script>
 
