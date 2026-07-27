@@ -445,12 +445,6 @@
       filter: grayscale(.25);
     }
 
-    .dns-disabled {
-      opacity: .4;
-      filter: grayscale(.35);
-      pointer-events: none;
-      user-select: none;
-    }
 
     .table-wrap { width: 100%; overflow-x: auto; }
     table.dns {
@@ -511,27 +505,6 @@
     .info { color: var(--text); }
     .info .label { color: var(--muted); }
 
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px 4px 8px;
-      border: 1px solid #B7D992;
-      border-radius: 999px;
-      background: #F4FAEC;
-      color: var(--green);
-      font-size: 13px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .status-pill svg { width: 14px; height: 14px; }
-
-    .row-actions {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      color: #A0A7AD;
-    }
     .row-actions button {
       appearance: none;
       background: none;
@@ -723,8 +696,7 @@
         <h3 class="zone-banner__title">This DNS zone is not in effect</h3>
         <p class="zone-banner__text">
           Your domain is using different name servers, so changes made here will not take effect.
-          To use Account Manager DNS for <strong>thereisagame.com</strong>, update your name servers to
-          <strong>ns1.dnspackage.com</strong> and <strong>ns2.dnspackage.com</strong>.
+          To use Account Manager DNS for <strong>thereisagame.com</strong>, update your name servers to ones offered by Crazy Domains.
         </p>
       </div>
       <div class="zone-banner__actions">
@@ -733,10 +705,10 @@
       </div>
     </div>
 
-    <div class="dns-disabled" aria-disabled="true">
+    <div>
       <div class="section-head">
         <h2>DNS Records</h2>
-        <button class="btn-add" type="button" disabled>Add Record</button>
+        <button class="btn-add" type="button">Add Record</button>
       </div>
 
       <div class="table-wrap">
@@ -747,7 +719,6 @@
               <th>Record Name</th>
               <th>Sub Domain</th>
               <th>Record Information</th>
-              <th>Status</th>
               <th></th>
             </tr>
           </thead>
@@ -757,7 +728,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.73</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -768,7 +738,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.74</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -779,7 +748,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">www.thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.74</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -790,7 +758,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>MX Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Priority:</span> 10 &nbsp; <span class="label">Hostname:</span> mx1.titan.email</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -801,7 +768,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>MX Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Priority:</span> 20 &nbsp; <span class="label">Hostname:</span> mx2.titan.email</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -812,7 +778,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>TXT Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Content:</span> v=spf1 include:spf.titan.email ~all</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -823,7 +788,6 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>TXT Record</span></td>
               <td class="sub">titan1._domainkey.thereisagame.com</td>
               <td class="info"><span class="label">Content:</span> v=DKIM1; k=rsa; p=MIGf…</td>
-              <td><span class="status-pill"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M4.2 7.1l1.8 1.8 3.8-3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Active</span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -848,10 +812,8 @@
           <div class="zone-banner__body">
             <h3 class="zone-banner__title">Update your name servers to activate Account Manager DNS</h3>
             <p class="zone-banner__text">
-              Your domain is currently using <strong>ns1.bluehost.com</strong> and <strong>ns2.bluehost.com</strong>,
-              so the DNS zone in Account Manager is not in effect.
-              To use Account Manager DNS for <strong>thereisagame.com</strong>, change your name servers below to
-              <strong>ns1.dnspackage.com</strong> and <strong>ns2.dnspackage.com</strong>.
+              Your domain is currently pointing to different name servers, so the DNS zone in Account Manager is not in effect.
+              To use Account Manager DNS for <strong>thereisagame.com</strong>, update your name servers to ones offered by Crazy Domains.
             </p>
           </div>
           <div class="zone-banner__actions">
