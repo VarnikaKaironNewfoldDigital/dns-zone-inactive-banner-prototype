@@ -516,6 +516,35 @@
     }
     .row-actions svg { width: 16px; height: 16px; }
 
+    /* Status column + tooltip (zone inactive) */
+    .zone-status { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+    .zone-status.is-active { color: #3D7A12; }
+    .zone-status .tip { position: relative; display: inline-flex; }
+    .zone-status .tip__icon {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 1.5px solid #9AA3A8; color: #6B757B;
+      font-size: 10px; font-weight: 700; line-height: 1;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: help; background: #fff; padding: 0;
+    }
+    .zone-status .tip__bubble {
+      position: absolute; left: 50%; bottom: calc(100% + 8px);
+      transform: translateX(-50%);
+      width: 260px; padding: 10px 12px;
+      background: #2D3438; color: #fff; border-radius: 6px;
+      font-size: 12px; font-weight: 400; line-height: 1.45; white-space: normal; text-align: left;
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
+      opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .12s ease;
+      z-index: 20;
+    }
+    .zone-status .tip__bubble::after {
+      content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px;
+      border: 6px solid transparent; border-top-color: #2D3438;
+    }
+    .zone-status .tip:hover .tip__bubble,
+    .zone-status .tip:focus-within .tip__bubble { opacity: 1; visibility: visible; }
+    .zone-status.is-active .tip { display: none; }
+
     /* NS update warning modal — Figma layout */
     .modal-backdrop {
       position: fixed;
@@ -719,6 +748,7 @@
               <th>Record Name</th>
               <th>Sub Domain</th>
               <th>Record Information</th>
+              <th>Status</th>
               <th></th>
             </tr>
           </thead>
@@ -728,6 +758,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.73</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -738,6 +769,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.74</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -748,6 +780,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>A Record</span></td>
               <td class="sub">www.thereisagame.com</td>
               <td class="info"><span class="label">IP Address:</span> 5.100.156.74</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -758,6 +791,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>MX Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Priority:</span> 10 &nbsp; <span class="label">Hostname:</span> mx1.titan.email</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -768,6 +802,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>MX Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Priority:</span> 20 &nbsp; <span class="label">Hostname:</span> mx2.titan.email</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -778,6 +813,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>TXT Record</span></td>
               <td class="sub">thereisagame.com</td>
               <td class="info"><span class="label">Content:</span> v=spf1 include:spf.titan.email ~all</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -788,6 +824,7 @@
               <td><span class="rec-name"><span class="rec-icon" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.6" stroke="currentColor" stroke-width="1.2"/><path d="M1.8 6h8.4M6 1.8c1.3 1.3 2 2.6 2 4.2S7.3 9 6 10.2C4.7 9 4 7.6 4 6s.7-2.9 2-4.2z" stroke="currentColor" stroke-width="1"/></svg></span>TXT Record</span></td>
               <td class="sub">titan1._domainkey.thereisagame.com</td>
               <td class="info"><span class="label">Content:</span> v=DKIM1; k=rsa; p=MIGf…</td>
+              <td><span class="zone-status js-zone-status"><span class="js-zone-status-text">Unknown</span><span class="tip"><button type="button" class="tip__icon" aria-label="Why is the status unknown?">i</button><span class="tip__bubble" role="tooltip">Status is unknown because this domain is not using Account Manager DNS name servers. Changes to this record will not take effect until you update your name servers.</span></span></span></td>
               <td><span class="row-actions" aria-hidden="true">
   <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2l8.5-8.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
   <svg viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5.5 4l.5 9h4l.5-9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1073,16 +1110,22 @@
             updatedBanner.classList.add('is-visible');
             updatedBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
-          // Prototype: reflect recommended Account Manager DNS name servers
+          // Zone now authoritative: Status moves from Unknown to Active
+          document.querySelectorAll('.js-zone-status').forEach(function (el) {
+            el.classList.add('is-active');
+            var t = el.querySelector('.js-zone-status-text');
+            if (t) t.textContent = 'Active';
+          });
+          // Prototype: reflect expected Standard Account Manager DNS name servers
           var hosts = document.querySelectorAll('#view-ns table.ns tbody tr');
           if (hosts[0]) {
             var cells0 = hosts[0].querySelectorAll('td');
-            if (cells0[1]) cells0[1].textContent = 'ns1.dnspackage.com';
+            if (cells0[1]) cells0[1].textContent = 'ns1.crazydomains.com';
             if (cells0[2]) cells0[2].textContent = '—';
           }
           if (hosts[1]) {
             var cells1 = hosts[1].querySelectorAll('td');
-            if (cells1[1]) cells1[1].textContent = 'ns2.dnspackage.com';
+            if (cells1[1]) cells1[1].textContent = 'ns2.crazydomains.com';
             if (cells1[2]) cells1[2].textContent = '—';
           }
         });
